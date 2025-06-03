@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "userInterfaceStyle": "automatic",
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "NCT Survey",
+    "icon": "./assets/logo_1.png",
+    "slug": "d2d",
+    "android": {
+      "package": "com.gustikantor.appsurveypolitik2023",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Kami membutuhkan lokasi anda",
+          "NSLocationWhenInUseUsageDescription": "Kami membutuhkan lokasi anda"
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Kami membutuhkan akses gallery"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9e9cfc45-387a-46b8-a22a-a31c2cd99831"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.gustikantor.appsurveypolitik2023",
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/cb2325da-122c-4677-9315-e7d1c1ecebff"
+    },
+    "owner": "gustirizkia"
+  }
+}
