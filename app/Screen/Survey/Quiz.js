@@ -38,6 +38,7 @@ export default function Quiz({ route, navigation }) {
       }
     });
     setHideLoading(false);
+
     axios
       .get(`${BASE_URL}all-quiz/${target_id}`)
       .then((ress) => {
@@ -141,36 +142,6 @@ export default function Quiz({ route, navigation }) {
     let newData = [];
     let filterArray = null;
     let soal = item;
-
-    if (item.skip_soal) {
-      SoalGeneral.map((el, index) => {
-        newData.push(el);
-        if (el.id === soal.id) {
-          if (
-            SoalGeneral[index + 1]?.skip_soal_id !== soal.id &&
-            soal.skip_soal?.skip_if_pilihan_id !== pilihan
-          ) {
-            el.skip_soal_many.forEach((element_skip_many) => {
-              newData.push(element_skip_many);
-            });
-          } else {
-            if (SoalGeneral[index + 1]?.skip_soal_id === soal.id) {
-              if (soal.skip_soal?.skip_if_pilihan_id === pilihan) {
-                filterArray = SoalGeneral.filter(
-                  (item) => item.skip_soal_id !== soal.id
-                );
-              }
-            }
-          }
-        }
-      });
-
-      if (filterArray) {
-        SetSoalGeneral(filterArray);
-      } else {
-        SetSoalGeneral(newData);
-      }
-    }
 
     let formPiliihan = {
       soal_id: item.id,
@@ -351,7 +322,7 @@ export default function Quiz({ route, navigation }) {
                 </>
               ) : (
                 <>
-                  {item.tipe === "pg" ? (
+                  {item.pilihan?.length ? (
                     <MultiplePilihan
                       TempSoal={item}
                       callBack={(pilihan, itemData) => {
