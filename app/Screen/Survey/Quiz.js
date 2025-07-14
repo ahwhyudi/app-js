@@ -66,125 +66,154 @@ export default function Quiz({ route, navigation }) {
     SetFotoBersama(item);
   };
 
-  const handelPilihanYesNo = (pilihan, soal, type) => {
-    let newData = [];
-    let filterArray = null;
-    if (soal.skip_soal) {
-      SoalGeneral.map((el, index) => {
-        newData.push(el);
-        if (el.id === soal.id) {
-          if (
-            SoalGeneral[index + 1]?.skip_soal_id !== soal.id &&
-            soal.skip_soal?.skip_if_yes_no !== pilihan
-          ) {
-            el.skip_soal_many.forEach((element_skip_many) => {
-              newData.push(element_skip_many);
-            });
-            // newData.push(el.skip_soal);
-          } else {
-            if (SoalGeneral[index + 1]?.skip_soal_id === soal.id) {
-              if (soal.skip_soal?.skip_if_yes_no === pilihan) {
-                filterArray = SoalGeneral.filter(
-                  (item) => item.skip_soal_id !== soal.id
-                );
-              }
-            }
-          }
-        }
-      });
+  // const handelPilihanYesNo = (pilihan, soal, type) => {
+  //   let newData = [];
+  //   let filterArray = null;
+  //   if (soal.skip_soal) {
+  //     SoalGeneral.map((el, index) => {
+  //       newData.push(el);
+  //       if (el.id === soal.id) {
+  //         if (
+  //           SoalGeneral[index + 1]?.skip_soal_id !== soal.id &&
+  //           soal.skip_soal?.skip_if_yes_no !== pilihan
+  //         ) {
+  //           el.skip_soal_many.forEach((element_skip_many) => {
+  //             newData.push(element_skip_many);
+  //           });
+  //           // newData.push(el.skip_soal);
+  //         } else {
+  //           if (SoalGeneral[index + 1]?.skip_soal_id === soal.id) {
+  //             if (soal.skip_soal?.skip_if_yes_no === pilihan) {
+  //               filterArray = SoalGeneral.filter(
+  //                 (item) => item.skip_soal_id !== soal.id
+  //               );
+  //             }
+  //           }
+  //         }
+  //       }
+  //     });
 
-      if (filterArray) {
-        SetSoalGeneral(filterArray);
-      } else {
-        SetSoalGeneral(newData);
-      }
-    }
+  //     if (filterArray) {
+  //       SetSoalGeneral(filterArray);
+  //     } else {
+  //       SetSoalGeneral(newData);
+  //     }
+  //   }
 
-    let formPiliihan = {
-      soal_id: soal.id,
-      pilihan_id: null,
-      yes_no: pilihan,
-    };
+  //   let formPiliihan = {
+  //     soal_id: soal.id,
+  //     pilihan_id: null,
+  //     yes_no: pilihan,
+  //   };
 
-    let soal_id = null;
-    PilihanUser.map((itemMap) => {
-      if (itemMap.soal_id === soal.id) {
-        soal_id = soal.id;
-      }
-    });
+  //   let soal_id = null;
+  //   PilihanUser.map((itemMap) => {
+  //     if (itemMap.soal_id === soal.id) {
+  //       soal_id = soal.id;
+  //     }
+  //   });
 
-    if (soal_id) {
-      let newData = PilihanUser.map((el) => {
-        if (el.soal_id === soal_id) {
-          return { ...el, yes_no: pilihan };
-        }
+  //   if (soal_id) {
+  //     let newData = PilihanUser.map((el) => {
+  //       if (el.soal_id === soal_id) {
+  //         return { ...el, yes_no: pilihan };
+  //       }
 
-        return el;
-      });
+  //       return el;
+  //     });
 
-      newData.map((el, index) => {
-        if (el.soal_id === soal.skip_soal?.skip_soal_id) {
-          if (pilihan === soal.skip_soal?.skip_if_yes_no) {
-            newData = newData.filter((item) => {
-              return item.soal_id !== soal.skip_soal?.id;
-            });
-          }
-        }
-      });
+  //     newData.map((el, index) => {
+  //       if (el.soal_id === soal.skip_soal?.skip_soal_id) {
+  //         if (pilihan === soal.skip_soal?.skip_if_yes_no) {
+  //           newData = newData.filter((item) => {
+  //             return item.soal_id !== soal.skip_soal?.id;
+  //           });
+  //         }
+  //       }
+  //     });
 
-      SetPilihanUser(newData);
+  //     SetPilihanUser(newData);
+  //   } else {
+  //     SetPilihanUser((PilihanUser) => [...PilihanUser, formPiliihan]);
+  //   }
+  // };
+
+  // const handleSetPilihan = (pilihan, item, type) => {
+  //   let newData = [];
+  //   let filterArray = null;
+  //   let soal = item;
+
+  //   let formPiliihan = {
+  //     soal_id: item.id,
+  //     pilihan_id: pilihan,
+  //     yes_no: null,
+  //   };
+
+  //   let soal_id = null;
+  //   PilihanUser.map((itemMap) => {
+  //     if (itemMap.soal_id === item.id) {
+  //       soal_id = item.id;
+  //     }
+  //   });
+
+  //   if (soal_id) {
+  //     let newData = PilihanUser.map((el) => {
+  //       if (el.soal_id === soal_id) {
+  //         return { ...el, pilihan_id: pilihan };
+  //       }
+
+  //       return el;
+  //     });
+
+  //     let soal = item;
+
+  //     newData.map((el, index) => {
+  //       if (el.soal_id === soal.skip_soal?.skip_soal_id) {
+  //         if (pilihan === soal.skip_soal?.skip_if_pilihan_id) {
+  //           newData = newData.filter((itemData) => {
+  //             return itemData.soal_id !== soal.skip_soal?.id;
+  //           });
+  //         }
+  //       }
+  //     });
+
+  //     SetPilihanUser(newData);
+  //   } else {
+  //     SetPilihanUser((PilihanUser) => [...PilihanUser, formPiliihan]);
+  //   }
+
+  //   // end function
+  // };
+
+
+  const handelPilihanYesNo = (pilihan, soal) => {
+    const existing = PilihanUser.find((el) => el.soal_id === soal.id);
+  
+    if (existing) {
+      const updated = PilihanUser.map((el) =>
+        el.soal_id === soal.id ? { ...el, yes_no: pilihan } : el
+      );
+      SetPilihanUser(updated);
     } else {
-      SetPilihanUser((PilihanUser) => [...PilihanUser, formPiliihan]);
+      SetPilihanUser((prev) => [...prev, { soal_id: soal.id, pilihan_id: null, yes_no: pilihan }]);
     }
   };
-
-  const handleSetPilihan = (pilihan, item, type) => {
-    let newData = [];
-    let filterArray = null;
-    let soal = item;
-
-    let formPiliihan = {
-      soal_id: item.id,
-      pilihan_id: pilihan,
-      yes_no: null,
-    };
-
-    let soal_id = null;
-    PilihanUser.map((itemMap) => {
-      if (itemMap.soal_id === item.id) {
-        soal_id = item.id;
-      }
-    });
-
-    if (soal_id) {
-      let newData = PilihanUser.map((el) => {
-        if (el.soal_id === soal_id) {
-          return { ...el, pilihan_id: pilihan };
-        }
-
-        return el;
-      });
-
-      let soal = item;
-
-      newData.map((el, index) => {
-        if (el.soal_id === soal.skip_soal?.skip_soal_id) {
-          if (pilihan === soal.skip_soal?.skip_if_pilihan_id) {
-            newData = newData.filter((itemData) => {
-              return itemData.soal_id !== soal.skip_soal?.id;
-            });
-          }
-        }
-      });
-
-      SetPilihanUser(newData);
+  
+  
+  const handleSetPilihan = (pilihan, item) => {
+    const existing = PilihanUser.find((el) => el.soal_id === item.id);
+  
+    if (existing) {
+      const updated = PilihanUser.map((el) =>
+        el.soal_id === item.id ? { ...el, pilihan_id: pilihan } : el
+      );
+      SetPilihanUser(updated);
     } else {
-      SetPilihanUser((PilihanUser) => [...PilihanUser, formPiliihan]);
+      SetPilihanUser((prev) => [...prev, { soal_id: item.id, pilihan_id: pilihan, yes_no: null }]);
     }
-
-    // end function
   };
-
+  
+  
   const setJawabanEssay = (jawaban, item) => {
     let formJawaban = {
       soal_id: item.id,

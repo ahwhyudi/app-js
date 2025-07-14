@@ -85,10 +85,10 @@ export default function Home({ navigation }) {
             Kategori Tugas
           </Text>
           <View className="flex-row space-x-7 justify-around mt-2">
-            <TouchableOpacity className=" items-center">
+            {/* <TouchableOpacity className=" items-center">
               <Image source={IC_input} className="w-14 h-14 object-contain" />
               <Text className="text-xs text-slate-500 mt-1">Input Relawan</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             {/* Survey */}
             {User?.target && (
               <TouchableOpacity

@@ -8,33 +8,34 @@ export default function UploadImage({ callbackImage }) {
   const [PreviewImage, SetPreviewImage] = useState(null);
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
     });
-
+  
     if (!result.canceled) {
       SetPreviewImage(result.assets[0].uri);
       callbackImage(result);
     }
   };
-
+  
   const openCamera = async () => {
-    // Ask the user for the permission to access the camera
+    // Minta izin kamera
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-
+  
     if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your camera!");
+      alert("Kamu harus izinkan kamera!");
       return;
     }
-
-    const result = await ImagePicker.launchCameraAsync();
-
+  
+    const result = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+  
     if (!result.canceled) {
       SetPreviewImage(result.assets[0].uri);
       callbackImage(result);
     }
-    
   };
 
   return (
