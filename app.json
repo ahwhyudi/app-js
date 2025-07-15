@@ -45,6 +45,9 @@
       "bundleIdentifier": "com.gustikantor.appsurveypolitik2023",
       "runtimeVersion": {
         "policy": "sdkVersion"
+      },
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "updates": {
